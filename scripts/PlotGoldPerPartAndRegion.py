@@ -2,25 +2,26 @@ import csv
 import numpy as np
 import matplotlib.pyplot as plt
 
-PATH = 'C:/Users/camar/Desktop/UFRGS/T31/lol-data-analysis/Plots/Gold Per Minute/'
+PATH = 'C:/Users/camar/Desktop/UFRGS/T31/lol-data-analysis/Plots/Gold Per Part/'
 REGIONS = ['NALCS', 'EULCS', 'CBLoL', 'LCK']
-X = [i for i in range(1,101)]
-Y = [[0 for j in range(len(REGIONS))]for i in range(100)]
+#X = [i for i in range(1,3+1)]
+X = ['Early Game', 'Mid Game', 'Late Game']
+Y = [[0 for j in range(len(REGIONS))]for i in range(3)]
 
 def plot():
-    print("XwX")
     #ax = plt.subplot(1, 1, 1)
     #ax.set_title(str(REGIONS[index]))
+    NALCS, = plt.plot(X, column(Y,0), 'o-', label='NALCS')
+    EULCS, = plt.plot(X, column(Y,1), 'o-', label='EULCS')
+    CBLoL, = plt.plot(X, column(Y,2), 'o-', label='CBLoL')
     LCK, = plt.plot(X, column(Y,3), 'o-', label='LCK')
-    CBLoL, = plt.plot(X, column(Y,2), 'd-', label='CBLoL')
-    plt.axis([1, 100, 0, 1])
-    plt.legend([LCK,CBLoL],['LCK','CBLoL'])
+    #plt.axis([1, 3, 0, 1])
+    plt.legend([LCK,EULCS,NALCS,CBLoL],['Coreia do Sul','Europa', 'América do Norte', 'Brasil'])
     #plt.legend(CBLoL, ["CBLoL"])
-    plt.ylabel('Y = Porcentagem de vitoria no momento X')
-    plt.xlabel('X = Decorrer da partida')
+    plt.ylabel('Porcentagem de vitoria')
+    plt.xlabel('Partes do Jogo')
     fig = plt.gcf()
-    fig.savefig(PATH + 'WinRateWithGoldLeadCBLoLvsLCK.jpg')
-    print("XX")
+    fig.savefig(PATH + 'WinRateWithGoldLeadByPartsCBLoLvsLCK.jpg')
 
 def column(matrix, i):
     return [row[i] for row in matrix]
@@ -43,12 +44,11 @@ with open(PATH + '/GoldByRegion.csv', newline='') as readFile:
             index = indexRegion(elements[0])
             Y[counter][index] = float(elements[2])
             counter = counter + 1
-            if counter == 100:
+            if counter == 3:
                 counter = 0
         header = False
 
-print("ss")
-plt.title('Porcentagem de vitoria estando com\nvantagem de ouro ao decorrer da partida')
+plt.title('Porcentagem de vitoria estando com\nvantagem de ouro nas partes do jogo')
 #for i in range(0,len(REGIONS)):
 plot()
 plt.show()

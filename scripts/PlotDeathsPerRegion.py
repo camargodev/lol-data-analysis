@@ -13,9 +13,9 @@ warnings.filterwarnings('ignore')
 
 PATH = 'C:/Users/camar/Desktop/UFRGS/T31/lol-data-analysis/Plots/Death Heatmaps/'
 
-def plotDeathsHeatmap(team, part):
-    input_csv = PATH + 'sheets/' + team + part + 'Kills.csv'
-    output_img = PATH + team + part + 'KillsHeatMap_2.png'
+def plotDeathsHeatmap(team, part, region):
+    input_csv = PATH + 'sheets/' + team + part + region + 'Kills.csv'
+    output_img = PATH + team + part + region + 'KillsHeatMap_ABCDE.png'
 
     mapImage = imread(PATH + 'rift.jpg')
     plotDeathsTable = pd.read_csv(input_csv)
@@ -47,7 +47,9 @@ def plotDeathsHeatmap(team, part):
     fig.savefig(output_img, dpi=dpi, transparent=False)
     print("New image is at " + output_img + '\n')
 
-parts = ['Early', 'Mid', 'Late']
-for part in parts:    
-    plotDeathsHeatmap('Blue', part)
-    plotDeathsHeatmap('Red', part)
+parts = ['Late']
+regions = ['CBLoL', 'LCK']
+for part in parts:
+    for region in regions:
+        plotDeathsHeatmap('Blue', part, region)
+        plotDeathsHeatmap('Red', part, region)
