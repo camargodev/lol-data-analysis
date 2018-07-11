@@ -18,7 +18,7 @@ def plot():
     #plt.axis([1, 3, 0, 1])
     plt.legend([LCK,EULCS,NALCS,CBLoL],['Coreia do Sul','Europa', 'América do Norte', 'Brasil'])
     #plt.legend(CBLoL, ["CBLoL"])
-    plt.ylabel('Porcentagem de vitoria')
+    plt.ylabel('Porcentagem de vitória')
     plt.xlabel('Partes do Jogo')
     fig = plt.gcf()
     fig.savefig(PATH + 'WinRateWithGoldLeadByPartsCBLoLvsLCK.jpg')
@@ -48,7 +48,7 @@ with open(PATH + '/GoldByRegion.csv', newline='') as readFile:
                 counter = 0
         header = False
 
-plt.title('Porcentagem de vitoria estando com\nvantagem de ouro nas partes do jogo')
+plt.title('Porcentagem de vitória estando com\nvantagem de ouro nas partes do jogo')
 #for i in range(0,len(REGIONS)):
 plot()
 plt.show()
